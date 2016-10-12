@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 
     // Movies json url
     private static final String url = "http://api.androidhive.info/json/movies.json";
+//    private  static final String url ="https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PLb6mJfxRt42z-Y45aaZ5y02Wn7L7-vJ_r&maxResults=50&key=AIzaSyCFCWKR5iGgfZtRS8w8qzEfmruKa616uaI";
     private ProgressDialog pDialog;
     private List<Movie> movieList = new ArrayList<Movie>();
     private ListView listView;
@@ -70,9 +71,9 @@ public class MainActivity extends Activity {
                             try {
                                 JSONObject obj = response.getJSONObject(i);
                                 Movie movie = new Movie();
-                                movie.setTitle(obj.getString("title"));
+                                movie.setTitle(obj.getString("kind"));
                                 movie.setThumbnailUrl(obj.getString("image"));
-                                movie.setRating(((Number) obj.get("rating"))
+                                movie.setRating(((Number) obj.get("etag"))
                                         .doubleValue());
                                 movie.setYear(obj.getInt("releaseYear"));
 
