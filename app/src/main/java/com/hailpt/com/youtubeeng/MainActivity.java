@@ -1,117 +1,132 @@
 package com.hailpt.com.youtubeeng;
 
-import android.os.AsyncTask;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.hailpt.com.youtubeeng.network.response.YoutubeRes;
-import com.hailpt.com.youtubeeng.network.service.RestClient;
-import com.hailpt.com.youtubeeng.network.service.RestData;
-import com.hailpt.com.youtubeeng.network.service.RestService;
-import com.hailpt.com.youtubeeng.util.JsonParser;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.hailpt.com.youtubeeng.adater.CustomListAdapter;
+import com.hailpt.com.youtubeeng.app.AppController;
+import com.hailpt.com.youtubeeng.model.Movie;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import retrofit.Callback;
-import retrofit.Response;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    protected RestService restService;
+
+public class MainActivity extends Activity {
     public static final String PLAYLIST_ID = "PLklScY-qIgglLu1nfH-i-L_KEHA9CfwAH";
     public static final String KEY = "AIzaSyAKOtDCpaGQ9624yS8-9pADYH0qFvmK6f8";
+
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    // Movies json url
+    private static final String url = "http://api.androidhive.info/json/movies.json";
+    private ProgressDialog pDialog;
+    private List<Movie> movieList = new ArrayList<Movie>();
+    private ListView listView;
+    private CustomListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listView = (ListView) findViewById(R.id.list);
+        adapter = new CustomListAdapter(this, movieList);
+        listView.setAdapter(adapter);
 
-        getData();
+        pDialog = new ProgressDialog(this);
+        // Showing progress dialog before making http request
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
-        restService = RestClient.getClient();
+        // changing action bar color
+//        getActionBar().setBackgroundDrawable(
+//                new ColorDrawable(Color.parseColor("#1b1b1b")));
 
+        // Creating volley request obj
+        JsonArrayRequest movieReq = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        hidePDialog();
 
-        restService.getYoutube().enqueue(new Callback<RestData<YoutubeRes>>() {
+                        // Parsing json
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject obj = response.getJSONObject(i);
+                                Movie movie = new Movie();
+                                movie.setTitle(obj.getString("title"));
+                                movie.setThumbnailUrl(obj.getString("image"));
+                                movie.setRating(((Number) obj.get("rating"))
+                                        .doubleValue());
+                                movie.setYear(obj.getInt("releaseYear"));
+
+                                // Genre is json array
+                                JSONArray genreArry = obj.getJSONArray("genre");
+                                ArrayList<String> genre = new ArrayList<String>();
+                                for (int j = 0; j < genreArry.length(); j++) {
+                                    genre.add((String) genreArry.get(j));
+                                }
+                                movie.setGenre(genre);
+
+                                // adding movie to movies array
+                                movieList.add(movie);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        // notifying list adapter about data changes
+                        // so that it renders the list view with updated data
+                        adapter.notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            public void onResponse(Response<RestData<YoutubeRes>> response) {
-                if (response.body() != null) {
-                    Log.d("hailpt", "=======hailpt==========" + response.body().data.getNextPageToken());
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                hidePDialog();
 
             }
         });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(movieReq);
     }
 
-    public void getData(){
-
-        // we will using AsyncTask during parsing
-        new AsyncTaskParseJson().execute();
-
-
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        hidePDialog();
     }
 
-
-    // you can make this class as another java file so it will be separated from your main activity.
-    public class AsyncTaskParseJson extends AsyncTask<String, String, String> {
-
-        final String TAG = "AsyncTaskParseJson.java";
-
-        // set your json string url here
-        String yourJsonStringUrl = "http://api.androidhive.info/json/movies.json";
-
-        // contacts JSONArray
-        JSONArray dataJsonArr = null;
-
-        @Override
-        protected void onPreExecute() {
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
         }
+    }
 
-        @Override
-        protected String doInBackground(String... arg0) {
-
-            // instantiate our json parser
-            JsonParser jParser = new JsonParser();
-
-            // get json string from url
-            JSONObject json = jParser.getJSONFromUrl(yourJsonStringUrl);
-
-//                dataJsonArr = json.getJSONArray("");
-            Gson gson = new Gson();
-            String jsond = gson.toJson(json);
-
-            Log.d("====","===="+jsond);
-
-
-            // get the array of users
-//                dataJsonArr = json.getJSONArray("");
-
-            // loop through all users
-//                for (int i = 0; i < dataJsonArr.length(); i++) {
-//
-//                    JSONObject c = dataJsonArr.getJSONObject(i);
-//
-//                    // Storing each json item in variable
-//                    String firstname = c.getString("title");
-//
-//                    // show the values in our logcat
-//                    Log.e(TAG, "firstname: " + firstname
-//                    );
-//
-//                }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String strFromDoInBg) {
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 }
