@@ -6,11 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.hailpt.com.youtubeeng.network.response.YoutubeRes;
+import com.hailpt.com.youtubeeng.network.service.RestClient;
+import com.hailpt.com.youtubeeng.network.service.RestData;
 import com.hailpt.com.youtubeeng.network.service.RestService;
 import com.hailpt.com.youtubeeng.util.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import retrofit.Callback;
+import retrofit.Response;
 
 public class MainActivity extends AppCompatActivity {
     protected RestService restService;
@@ -25,22 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
         getData();
 
-//        restService = RestClient.getClient();
-//
-//
-//        restService.getYoutube().enqueue(new Callback<RestData<YoutubeRes>>() {
-//            @Override
-//            public void onResponse(Response<RestData<YoutubeRes>> response) {
-//                if (response.body() != null) {
-//                    Log.d("hailpt", "=======hailpt==========" + response.body().data.getNextPageToken());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable t) {
-//
-//            }
-//        });
+        restService = RestClient.getClient();
+
+
+        restService.getYoutube().enqueue(new Callback<RestData<YoutubeRes>>() {
+            @Override
+            public void onResponse(Response<RestData<YoutubeRes>> response) {
+                if (response.body() != null) {
+                    Log.d("hailpt", "=======hailpt==========" + response.body().data.getNextPageToken());
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     public void getData(){
