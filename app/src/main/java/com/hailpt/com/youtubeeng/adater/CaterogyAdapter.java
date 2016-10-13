@@ -60,6 +60,7 @@ public class CaterogyAdapter extends RecyclerView.Adapter<CaterogyAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Caterogy caterogy = caterogyList.get(position);
         holder.title.setText(caterogy.getItemCount()+" Videos");
+
         if(caterogy.getId().equals("PL7YqrWXed1abuC9zxSYx3OI4GklZM4zrl")){
 //            Glide.with(mContext).load("https://i.ytimg.com/vi/IJRcpQBLFmI/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
             holder.count.setText("VLISH");

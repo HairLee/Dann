@@ -127,12 +127,15 @@ public class VlogListActitivty extends Activity {
                             Log.d("hailpt ======", "Item = " + snippet.getString("title"));
 
                             JSONObject resourceId = snippet.getJSONObject("resourceId");
+                            String publishedAt = snippet.getString("publishedAt");
+
                             Log.d("hailpt ======", "Item = " + snippet.getString("title"));
 
                             youtube.setThumbnail(thumbnails.getJSONObject("high").getString("url"));
-                            //                        youtube.setThumbnail("https://i.ytimg.com/vi/21vhYPLErlY/sddefault.jpg");
+                            //youtube.setThumbnail("https://i.ytimg.com/vi/21vhYPLErlY/sddefault.jpg");
                             youtube.setVideoId(resourceId.getString("videoId"));
                             youtube.setTitle(snippet.getString("title"));
+                            youtube.setPublishedAt(publishedAt);
                             youtubeList.add(youtube);
                         }else{
                             Log.d("hailpt ======", " have no thubmail .....................");

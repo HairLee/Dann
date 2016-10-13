@@ -25,13 +25,14 @@ public class VlogListAdapter extends RecyclerView.Adapter<VlogListAdapter.MyView
     private Context mContext;
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView title;
+        private TextView title,tvTime;
         private ImageView imvAva;
         private RelativeLayout rlMain;
 
         private MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
+            tvTime=(TextView)view.findViewById(R.id.txt_time);
             imvAva = (ImageView) view.findViewById(R.id.thumbnail);
             rlMain = (RelativeLayout)view.findViewById(R.id.rl_main);
             rlMain.setOnClickListener(this);
@@ -69,6 +70,7 @@ public class VlogListAdapter extends RecyclerView.Adapter<VlogListAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Youtube youtube = youtubeList.get(position);
         holder.title.setText(youtube.getTitle());
+        holder.tvTime.setText(splitString(youtube.getPublishedAt()));
         Glide.with(mContext).load(youtube.getThumbnail()).override(600, 200).fitCenter().into(holder.imvAva);
     }
 
@@ -82,4 +84,11 @@ public class VlogListAdapter extends RecyclerView.Adapter<VlogListAdapter.MyView
 
         public void onItemClick(int pos);
     }
+
+    public CharSequence splitString(String mText){
+        CharSequence headerChar = mText.subSequence(0, 10);
+      return headerChar;
+    }
+
+
 }

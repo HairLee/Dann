@@ -9,9 +9,18 @@ public class Youtube {
     private String videoId;
     private String thumbnail;
     private String title;
+    private String publishedAt;
 
     public Youtube(){
 
+    }
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
     }
 
     public String getVideoId() {
