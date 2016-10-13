@@ -35,6 +35,9 @@ public class VlogListAdapter extends RecyclerView.Adapter<VlogListAdapter.MyView
             imvAva = (ImageView) view.findViewById(R.id.thumbnail);
             rlMain = (RelativeLayout)view.findViewById(R.id.rl_main);
             rlMain.setOnClickListener(this);
+//
+//            Typeface type = Typeface.createFromAsset(mContext.getAssets(),"fonts/VNI-Jamai.TTF");
+//            title.setTypeface(type);
 
         }
 
@@ -66,7 +69,7 @@ public class VlogListAdapter extends RecyclerView.Adapter<VlogListAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Youtube youtube = youtubeList.get(position);
         holder.title.setText(youtube.getTitle());
-        Glide.with(mContext).load(youtube.getThumbnail()).override(200, 200).centerCrop().into(holder.imvAva);
+        Glide.with(mContext).load(youtube.getThumbnail()).override(600, 200).fitCenter().into(holder.imvAva);
     }
 
     @Override

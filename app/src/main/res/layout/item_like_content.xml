@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:src="@drawable/vl"
+                android:src="@drawable/logo_app"
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
