@@ -62,28 +62,28 @@ public class CaterogyAdapter extends RecyclerView.Adapter<CaterogyAdapter.MyView
         holder.title.setText(caterogy.getItemCount()+" Videos");
 
         if(caterogy.getId().equals("PL7YqrWXed1abuC9zxSYx3OI4GklZM4zrl")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/IJRcpQBLFmI/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.vlish);
             holder.count.setText("VLISH");
         } else if(caterogy.getId().equals("PL7YqrWXed1abz3FwdKMZEwclWMZ2cMHio")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/Qejo8-epylk/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.fourty);
             holder.count.setText("42 Ngày Phát Âm");
         } else if(caterogy.getId().equals("PL7YqrWXed1aaKMuLMJSnD3KJ3sWN99MjW")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/g5lL32-NoTI/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.beer);
             holder.count.setText("Luyện Nghe Tiếng Anh");
         }else if(caterogy.getId().equals("PL7YqrWXed1aaAoGva5zyyWBz0Hg-bWlEJ")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/1RDs-ivyXlA/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.stress);
             holder.count.setText("Chỉnh Lỗi Chính Tả");
         } else if(caterogy.getId().equals("PL7YqrWXed1abWxt9d4IH2f1FGKylciC7P")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/trrPPPjxe-4/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.british_american);
             holder.count.setText("Luyện Phát Âm");
         }else if(caterogy.getId().equals("PL7YqrWXed1abaMsLal55KiDvlavvR-Why")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/MpHQ0At8JCw/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.go_back);
             holder.count.setText("Từ Vựng Và Ngữ Pháp");
         } else if(caterogy.getId().equals("PL7YqrWXed1aZZWbmMDXx0m-ugJdylZ8rf")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/DFPD0ZTSpP8/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.fuck);
             holder.count.setText("Những Clip Hay Nhất");
         } else if(caterogy.getId().equals("PL7YqrWXed1aaFMn8Rakj0OQb0_dkw71hs")){
-//            Glide.with(mContext).load("https://i.ytimg.com/vi/Cq8uxQbjb_w/sddefault.jpg").override(200, 200).centerCrop().into(holder.thumbnail);
+            holder.thumbnail.setImageResource(R.drawable.go_back);
             holder.count.setText("-----");
         }
 

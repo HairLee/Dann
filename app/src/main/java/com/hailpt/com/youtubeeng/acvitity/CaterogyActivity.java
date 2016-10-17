@@ -1,11 +1,15 @@
 package com.hailpt.com.youtubeeng.acvitity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,12 +45,22 @@ public class CaterogyActivity extends AppCompatActivity {
     private Caterogy caterogy = new Caterogy();
     private List<Caterogy> caterogyList = new ArrayList<>();
     private CustomProgressDialog customProgressDialog;
+    private ImageView imvBg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        makeJsonObjectRequest();
+        imvBg = (ImageView)findViewById(R.id.imv_bg);
+        if(isNetworkConnected()){
+            makeJsonObjectRequest();
+        } else {
+            Toast.makeText(this,"Check internet please !", Toast.LENGTH_LONG).show();
+        }
+    }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
     private String jsonResponse;
@@ -93,15 +107,6 @@ public class CaterogyActivity extends AppCompatActivity {
 
                     Log.d("hailpt", "json ======" + json);
 
-//
-//                    jsonResponse = totalResults + " === " + resultsPerPage;
-//                    jsonResponse += "Name: " + name + "\n\n";
-//                    jsonResponse += "Email: " + email + "\n\n";
-//
-//                    Toast.makeText(getApplicationContext(),
-//                            jsonResponse,
-//                            Toast.LENGTH_LONG).show();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),
@@ -125,9 +130,8 @@ public class CaterogyActivity extends AppCompatActivity {
     }
 
     public void updateLayout() {
-
+        imvBg.setVisibility(View.GONE);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
         likeContentAdapter = new CaterogyAdapter(this, caterogyList, new CaterogyAdapter.OnRemoveCallBack() {
             @Override
             public void remove(final int pos) {
