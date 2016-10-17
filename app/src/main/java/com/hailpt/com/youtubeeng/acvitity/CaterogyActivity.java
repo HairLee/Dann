@@ -140,6 +140,9 @@ public class CaterogyActivity extends AppCompatActivity {
                 intent.putExtra("CHANNEL_ID", caterogyList.get(position).getId());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                startActivity(intent);
+
+
                 Log.d(TAG, "CHANNEL_ID CHANNEL_ID == " + caterogyList.get(position).getId());
             }
         });
