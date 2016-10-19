@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">YoutubeEng</string>
-
+    <string name="app_name">Tiếng Anh Giao Tiếp Cùng Dan Hauer</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 </resources>
