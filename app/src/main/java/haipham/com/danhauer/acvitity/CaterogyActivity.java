@@ -47,15 +47,16 @@ public class CaterogyActivity extends AppCompatActivity {
     private List<Caterogy> caterogyList = new ArrayList<>();
     private CustomProgressDialog customProgressDialog;
     private ImageView imvBg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imvBg = (ImageView)findViewById(R.id.imv_bg);
-        if(isNetworkConnected()){
+        imvBg = (ImageView) findViewById(R.id.imv_bg);
+        if (isNetworkConnected()) {
             makeJsonObjectRequest();
         } else {
-            Toast.makeText(this,"Check internet please !", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Check internet please !", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -65,6 +66,7 @@ public class CaterogyActivity extends AppCompatActivity {
     }
 
     private String jsonResponse;
+
     private void makeJsonObjectRequest() {
 
         customProgressDialog = new CustomProgressDialog(this);
@@ -97,9 +99,9 @@ public class CaterogyActivity extends AppCompatActivity {
                         Log.d("hailpt ======", "Id = " + item.getString("id"));
                         caterogy.setId(item.getString("id"));
                         caterogy.setItemCount(snippet.getString("itemCount"));
-                        if (!item.getString("id").equals("PL7YqrWXed1aaFMn8Rakj0OQb0_dkw71hs")&&!item.getString("id").equals("PL7YqrWXed1aZMHsToX32rksxdvVtczdFN")&&!item.getString("id").equals("PL7YqrWXed1aZMHsToX32rksxdvVtczdFN")&&!item.getString("id").equals("PL7YqrWXed1abbjqN85ERxqsHUHHIxfiKF")) {
-                            caterogyList.add(caterogy);
-                        }
+//                        if (!item.getString("id").equals("PL7YqrWXed1aaFMn8Rakj0OQb0_dkw71hs")&&!item.getString("id").equals("PL7YqrWXed1aZMHsToX32rksxdvVtczdFN")&&!item.getString("id").equals("PL7YqrWXed1aZMHsToX32rksxdvVtczdFN")&&!item.getString("id").equals("PL7YqrWXed1abbjqN85ERxqsHUHHIxfiKF")) {
+                        caterogyList.add(caterogy);
+//                        }
                     }
 
                     Log.d("hailpt ======", "SIZE = " + caterogyList.size());

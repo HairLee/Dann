@@ -19,16 +19,26 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:src="@drawable/logo3"
                 android:scaleType="centerCrop"
-                android:src="@drawable/logo_app"
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="100dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 />
 
             <TextView
+                android:id="@+id/txt_stt"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="6dp"
+                android:textColor="@color/list_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"/>
+
+            <TextView
+                android:visibility="gone"
                 android:text="pronun"
                 android:fontFamily="Roboto-Thin"
                 android:id="@+id/count"
@@ -43,15 +53,16 @@
 
             <TextView
                 android:textStyle="normal|italic"
-                android:textColor="#a6a6a6"
+                android:textColor="#7f1337"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/count"
-                android:paddingBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="12dp" />
+                android:textSize="16dp" />
 
         </RelativeLayout>
 
