@@ -2,12 +2,15 @@ package haipham.com.danhauer.adater;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -20,6 +23,8 @@ public class CaterogyAdapter extends RecyclerView.Adapter<CaterogyAdapter.MyView
     private Context mContext;
     private List<Caterogy> caterogyList;
     private OnRemoveCallBack mOnRemoveCallBack;
+    private String mLink;
+    private String mName;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count,tvStt;
@@ -59,48 +64,58 @@ public class CaterogyAdapter extends RecyclerView.Adapter<CaterogyAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Caterogy caterogy = caterogyList.get(position);
-        holder.title.setText(caterogy.getItemCount() + " Videos");
+
         holder.tvStt.setText((position+1)+"");
 
+        Log.d("hailpt","POS ++ +++ ++++ === "+position);
 
-//        String caterogyId = caterogy.getId();
-//
-//        if (caterogyId.equals("PL7YqrWXed1abuC9zxSYx3OI4GklZM4zrl")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/vlish.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("VLISH");
-//        } else if (caterogy.equals("PL7YqrWXed1aZZWbmMDXx0m-ugJdylZ8rf")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/fuck.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("Những Clip Hay Nhất");
-//        } else if (caterogyId.equals("PL7YqrWXed1abaMsLal55KiDvlavvR-Why")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/go_back.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("Từ Vựng Và Ngữ Pháp");
-//        } else if (caterogy.equals("PL7YqrWXed1abz3FwdKMZEwclWMZ2cMHio")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/fourty.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("42 Ngày Phát Âm");
-//        } else if (caterogyId.equals("PL7YqrWXed1abWxt9d4IH2f1FGKylciC7P")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/british_american.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("Luyện Phát Âm");
-//        } else if (caterogy.equals("PL7YqrWXed1aaKMuLMJSnD3KJ3sWN99MjW")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/beer.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("Luyện Nghe Tiếng Anh");
-//        } else if (caterogyId.equals("PL7YqrWXed1aaAoGva5zyyWBz0Hg-bWlEJ")) {
-//            Glide.with(mContext)
-//                    .load(Uri.parse("file:///android_asset/stress.png"))
-//                    .into(holder.thumbnail);
-//            holder.count.setText("Chỉnh Lỗi Chính Tả");
-//        }
+        switch (position) {
+            case 0:
+                // Luyen Nghe Tieng Anh
+                mLink =  "https://i.ytimg.com/vi/gb5HmcdIHb8/hqdefault.jpg";
+                mName = "Luyen Nghe Tieng Anh";
+                break;
+            case 1:
+                // Chinh loi tieng Anh
+                mLink =  "https://i.ytimg.com/vi/AZ9bKjH6tcQ/hqdefault.jpg";
+                mName ="Chinh Loi Tieng Anh";
+                break;
+            case 2:
+                // Tu vung va Ngu phap
+                mLink =  "https://i.ytimg.com/vi/B3jxIZO9Rys/hqdefault.jpg";
+                mName ="Tu Vung Va Ngu Phap";
+                break;
+
+            case 3:
+                // Tieng Anh ngo
+                mLink =  "https://i.ytimg.com/vi/SRsSUH2ogsc/hqdefault.jpg";
+                mName ="Tieng Anh ngo";
+                break;
+            case 4:
+                // VLish
+                mLink =  "https://i.ytimg.com/vi/IJRcpQBLFmI/hqdefault.jpg";
+                mName ="VLish";
+                break;
+            case 5:
+                // Nhung clip hay nhat
+                mLink =  "https://i.ytimg.com/vi/DFPD0ZTSpP8/hqdefault.jpg";
+                mName ="Nhung Clip Hay Nhat";
+                break;
+            case 6:
+                // Luyen phat am
+                mLink =  "https://i.ytimg.com/vi/g5lL32-NoTI/hqdefault.jpg";
+                mName ="Luyen Phat Am";
+                break;
+            case 7:
+                // 42 ngay phat am
+                mLink =  "https://i.ytimg.com/vi/Qejo8-epylk/hqdefault.jpg";
+                mName ="42 Ngay Phat Am";
+                break;
+        }
+
+
+        Glide.with(mContext).load(mLink).centerCrop().into(holder.thumbnail);
+        holder.title.setText(mName);
     }
 
 

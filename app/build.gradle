@@ -8,8 +8,8 @@ android {
         applicationId "haipham.com.danhauer"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,4 +33,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/volley.jar')
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

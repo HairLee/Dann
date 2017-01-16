@@ -8,9 +8,18 @@ public class Caterogy {
 
     private String id;
     private String itemCount;
+    private String mImage;
 
     public Caterogy(){
 
+    }
+
+    public String getmImage() {
+        return mImage;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
     }
 
     public String getId() {

@@ -54,7 +54,8 @@ public class CaterogyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imvBg = (ImageView) findViewById(R.id.imv_bg);
         if (isNetworkConnected()) {
-            makeJsonObjectRequest();
+//            makeJsonObjectRequest();
+            getData();
         } else {
             Toast.makeText(this, "Check internet please !", Toast.LENGTH_LONG).show();
         }
@@ -132,6 +133,19 @@ public class CaterogyActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 
+
+    public void getData(){
+
+        for (int i = 0;i<8;i++){
+            Caterogy caterogy = new Caterogy();
+            caterogyList.add(caterogy);
+        }
+
+        updateLayout();
+
+    }
+
+
     public void updateLayout() {
         imvBg.setVisibility(View.GONE);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -143,12 +157,50 @@ public class CaterogyActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(int position) {
+
+                String mLink = "";
+                switch (position) {
+                    case 0:
+                        // Luyen Nghe Tieng Anh
+                        mLink =  "PL7YqrWXed1aaKMuLMJSnD3KJ3sWN99MjW";
+                        break;
+                    case 1:
+                        // Chinh loi tieng Anh
+                        mLink =  "PL7YqrWXed1aaAoGva5zyyWBz0Hg-bWlEJ";
+                        break;
+                    case 2:
+                        // Tu vung va Ngu phap
+                        mLink =  "PL7YqrWXed1abaMsLal55KiDvlavvR-Why";
+                        break;
+
+                    case 3:
+                        // Tieng Anh ngo
+                        mLink =  "PL7YqrWXed1aa81yA4JL9tXkX8qoBSFGlH";
+                        break;
+                    case 4:
+                        // VLish
+                        mLink =  "PL7YqrWXed1abuC9zxSYx3OI4GklZM4zrl";
+                        break;
+                    case 5:
+                        // Nhung clip hay nhat
+                        mLink =  "PL7YqrWXed1aZZWbmMDXx0m-ugJdylZ8rf";
+                        break;
+                    case 6:
+                        // Luyen phat am
+                        mLink =  "PL7YqrWXed1abWxt9d4IH2f1FGKylciC7P";
+                        break;
+                    case 7:
+                        // 42 ngay phat am
+                        mLink =  "PL7YqrWXed1abz3FwdKMZEwclWMZ2cMHio";
+                        break;
+                }
+
                 Intent intent = new Intent(CaterogyActivity.this, VlogListActitivty.class);
-                intent.putExtra("CHANNEL_ID", caterogyList.get(position).getId());
+                intent.putExtra("CHANNEL_ID",mLink);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                startActivity(intent);
-                Log.d(TAG, "CHANNEL_ID CHANNEL_ID == " + caterogyList.get(position).getId());
+
+
             }
         });
 

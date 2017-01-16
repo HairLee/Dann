@@ -133,6 +133,8 @@ public class VlogListActitivty extends Activity {
 
                             youtube.setThumbnail(thumbnails.getJSONObject("high").getString("url"));
                             //youtube.setThumbnail("https://i.ytimg.com/vi/21vhYPLErlY/sddefault.jpg");
+                            Log.d("hailpt ======", " thubmail " + thumbnails.getJSONObject("high").getString("url"));
+
                             youtube.setVideoId(resourceId.getString("videoId"));
                             youtube.setTitle(snippet.getString("title"));
                             youtube.setPublishedAt(publishedAt);
